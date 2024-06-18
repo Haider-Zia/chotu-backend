@@ -14,21 +14,13 @@ import { ReviewsModule } from './features/reviews/reviews.module';
 import { AuthModule } from './core/auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TransactionsModule } from './features/transactions/transactions.module';
+import { typeOrmModuleOptions } from 'ormConfig';
 
 @Module({
   controllers: [AppController],
   providers: [AppService],
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: process.env.DB_HOST,
-      port: Number(process.env.DB_PORT),
-      username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
-      autoLoadEntities: true,
-      synchronize: !(process.env.ENV == 'production'), // Set to false in production
-    }),
+    TypeOrmModule.forRoot(typeOrmModuleOptions),
     UsersModule,
     BusinessesModule,
     LocationsModule,
