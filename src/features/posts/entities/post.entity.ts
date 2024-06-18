@@ -13,7 +13,6 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { PostLocation } from './postLocation.entity';
-import { City } from 'src/features/locations/entities/city.entity';
 import { Case } from './case.entity';
 import { Tag } from './tag.entity';
 import { Queue } from './queue.entity';

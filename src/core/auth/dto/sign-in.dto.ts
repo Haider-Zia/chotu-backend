@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsOptional, ValidateIf } from "class-validator";
+import { IsEmail, IsNotEmpty, IsOptional, ValidateIf } from 'class-validator';
 
 export class SignInDto {
   @IsNotEmpty()

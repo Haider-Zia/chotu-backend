@@ -2,7 +2,6 @@ import { EntityBase } from 'src/common/base.entity';
 import {
   BeforeInsert,
   BeforeUpdate,
-  Check,
   Column,
   Entity,
   ManyToOne,

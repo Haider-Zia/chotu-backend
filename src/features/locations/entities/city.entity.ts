@@ -1,6 +1,5 @@
 import { EntityBase } from 'src/common/base.entity';
 import { Address } from 'src/features/businesses/entities/address.entity';
-import { Post } from 'src/features/posts/entities/post.entity';
 import { PostLocation } from 'src/features/posts/entities/postLocation.entity';
 import { User } from 'src/features/users/entities/user.entity';
 import { UserLocation } from 'src/features/users/entities/userLocation.entity';
