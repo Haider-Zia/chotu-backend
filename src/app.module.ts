@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { UsersModule } from './features/users/users.module';
 import { BusinessesModule } from './features/businesses/businesses.module';
 import { LocationsModule } from './features/locations/locations.module';
@@ -17,8 +15,6 @@ import { TransactionsModule } from './features/transactions/transactions.module'
 import { typeOrmModuleOptions } from 'ormConfig';
 
 @Module({
-  controllers: [AppController],
-  providers: [AppService],
   imports: [
     TypeOrmModule.forRoot(typeOrmModuleOptions),
     UsersModule,

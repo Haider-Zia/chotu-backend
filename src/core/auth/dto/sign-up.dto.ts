@@ -1,30 +1,39 @@
 import {
   IsEmail,
   IsNotEmpty,
+  IsOptional,
+  IsPhoneNumber,
   IsString,
   Length,
   Matches,
+  ValidateIf,
 } from 'class-validator';
 
 export class SignUpDto {
-  @IsNotEmpty()
-  @IsString()
-  userName: string;
+  @IsOptional()
+  @ValidateIf((object) => !object.phoneNumber, {
+    message: 'Email or phone number is required.',
+  })
+  @IsEmail({}, { message: 'Invalid email.' })
+  email?: string;
 
-  @IsNotEmpty()
-  @IsEmail()
-  email: string;
+  @IsOptional()
+  @ValidateIf((object) => !object.email, {
+    message: 'Email or phone number is required.',
+  })
+  @IsPhoneNumber('PK', { message: 'Invalid phone number.' })
+  phoneNumber?: string;
 
-  @IsNotEmpty()
-  @IsString()
+  @IsNotEmpty({ message: 'Password should not be empty.' })
+  @IsString({ message: 'Password must be a string.' })
   @Length(8, 20, {
-    message: 'password must be between 8 and 20 characters in length',
+    message: 'Password must be between 8 and 20 characters in length.',
   })
   @Matches(/((?=.*[a-z])(?=.*[A-Z]))/, {
-    message: `password must contain a combination of uppercase & lowercase letters`,
+    message: `Password must contain a combination of uppercase & lowercase letters.`,
   })
   @Matches(/((?=.*[0-9]))/, {
-    message: `password must contain a number from 0-9`,
+    message: `Password must contain a number from 0-9.`,
   })
   password: string;
 }

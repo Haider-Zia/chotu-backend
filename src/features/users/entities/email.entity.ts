@@ -10,7 +10,7 @@ export class Email extends EntityBase {
   @ManyToOne(() => User, (user) => user.emails, { nullable: false })
   user: User;
 
-  @Column()
+  @Column({ unique: true })
   email: string;
 
   @Column({ default: false })

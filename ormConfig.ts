@@ -8,7 +8,7 @@ const sharedOptions: DataSourceOptions = {
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  synchronize: false, // Set to false in all environments. Explicitly create/generate and run migrations.
+  synchronize: process.env.ENV == 'dev' ? true : false,
 };
 
 export const dataSourceOptions: DataSourceOptions = {

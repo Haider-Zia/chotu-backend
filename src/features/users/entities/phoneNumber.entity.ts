@@ -10,7 +10,7 @@ export class PhoneNumber extends EntityBase {
   @ManyToOne(() => User, (user) => user.phoneNumbers, { nullable: false })
   user: User;
 
-  @Column()
+  @Column({ unique: true })
   phoneNumber: string;
 
   @Column({ default: false })

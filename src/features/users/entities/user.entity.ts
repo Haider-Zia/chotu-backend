@@ -36,7 +36,7 @@ export class User extends EntityBase {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ nullable: true })
   name: string;
 
   @Column({ nullable: true }) // nullable to allow future third party auth
@@ -49,7 +49,7 @@ export class User extends EntityBase {
   })
   status: UserStatusEnum = UserStatusEnum.CREATED;
 
-  @ManyToOne(() => City, (city) => city.users, { nullable: false })
+  @ManyToOne(() => City, (city) => city.users, { nullable: true })
   city: City;
 
   @ManyToMany(() => Service, (service) => service.businesses)
@@ -63,10 +63,12 @@ export class User extends EntityBase {
   @OneToMany(() => UserLocation, (userLocation) => userLocation.user)
   locations: UserLocation[];
 
-  @OneToMany(() => PhoneNumber, (phoneNumber) => phoneNumber.user)
+  @OneToMany(() => PhoneNumber, (phoneNumber) => phoneNumber.user, {
+    cascade: ['insert'],
+  })
   phoneNumbers: PhoneNumber[];
 
-  @OneToMany(() => Email, (email) => email.user)
+  @OneToMany(() => Email, (email) => email.user, { cascade: ['insert'] })
   emails: Email[];
 
   @OneToMany(() => Role, (userRole) => userRole.user)
