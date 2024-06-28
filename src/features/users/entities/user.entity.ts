@@ -10,7 +10,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { UserLocation } from './userLocation.entity';
-import { EntityBase } from 'src/common/base.entity';
+import { EntityBase } from 'src/common/entities/base.entity';
 import { UserStatusEnum } from '../enums/userStatus.enum';
 import { PhoneNumber } from './phoneNumber.entity';
 import { Email } from './email.entity';

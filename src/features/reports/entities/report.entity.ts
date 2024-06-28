@@ -1,4 +1,4 @@
-import { EntityBase } from 'src/common/base.entity';
+import { EntityBase } from 'src/common/entities/base.entity';
 import { Comment } from 'src/features/comments/entities/comment.entity';
 import { Message } from 'src/features/conversations/entities/message.entity';
 import { Post } from 'src/features/posts/entities/post.entity';

@@ -1,4 +1,4 @@
-import { EntityBase } from 'src/common/base.entity';
+import { EntityBase } from 'src/common/entities/base.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { ConversationTypeEnum } from '../enums/conversationType.enum';
 import { ConversationParticipant } from './conversationParticipant.entity';

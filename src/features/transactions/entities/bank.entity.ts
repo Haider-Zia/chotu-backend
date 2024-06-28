@@ -1,4 +1,4 @@
-import { EntityBase } from 'src/common/base.entity';
+import { EntityBase } from 'src/common/entities/base.entity';
 import { BankAccount } from 'src/features/users/entities/bankAccount.entity';
 import { Media } from 'src/shared/media/entities/media.entity';
 import {

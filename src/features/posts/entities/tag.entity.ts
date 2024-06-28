@@ -1,4 +1,4 @@
-import { EntityBase } from 'src/common/base.entity';
+import { EntityBase } from 'src/common/entities/base.entity';
 import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { TagEnum } from '../enums/tag.enum';
 import { Post } from './post.entity';

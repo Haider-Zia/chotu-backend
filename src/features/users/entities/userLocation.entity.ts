@@ -1,7 +1,7 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { User } from './user.entity';
 import { City } from 'src/features/locations/entities/city.entity';
-import { EntityBase } from 'src/common/base.entity';
+import { EntityBase } from 'src/common/entities/base.entity';
 import { UserLocationStatusEnum } from '../enums/userLocationStatus.enum';
 
 @Entity()

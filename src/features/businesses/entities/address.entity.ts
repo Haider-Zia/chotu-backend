@@ -1,6 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { City } from 'src/features/locations/entities/city.entity';
-import { EntityBase } from 'src/common/base.entity';
+import { EntityBase } from 'src/common/entities/base.entity';
 import { User } from 'src/features/users/entities/user.entity';
 
 @Entity()
