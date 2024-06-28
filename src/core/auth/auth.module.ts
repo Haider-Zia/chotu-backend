@@ -11,10 +11,12 @@ import { PhoneNumber } from 'src/features/users/entities/phoneNumber.entity';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants/jwt-constants';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import { UsersModule } from 'src/features/users/users.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([User, OTP, Email, PhoneNumber]),
+    UsersModule,
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,

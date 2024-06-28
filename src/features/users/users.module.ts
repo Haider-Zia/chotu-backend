@@ -22,5 +22,6 @@ import { BankAccount } from './entities/bankAccount.entity';
   ],
   controllers: [UsersController],
   providers: [UsersService],
+  exports: [UsersService],
 })
 export class UsersModule {}

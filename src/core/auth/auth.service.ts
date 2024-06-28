@@ -3,51 +3,36 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { EntityNotFoundError, QueryFailedError, Repository } from 'typeorm';
+import { EntityNotFoundError, QueryFailedError } from 'typeorm';
 import { User } from 'src/features/users/entities/user.entity';
 import { SignUpDto } from './dto/sign-up.dto';
-import { Email } from 'src/features/users/entities/email.entity';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { PhoneNumber } from 'src/features/users/entities/phoneNumber.entity';
+import { UsersService } from 'src/features/users/users.service';
 
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectRepository(User)
-    private userRepository: Repository<User>,
-    @InjectRepository(Email)
-    private emailRepository: Repository<Email>,
-    @InjectRepository(PhoneNumber)
-    private phoneNumberRepository: Repository<PhoneNumber>,
     private jwtService: JwtService,
+    private usersService: UsersService,
   ) {}
 
-  async signUp(signUpDto: SignUpDto) {
+  async signUp(signUpDto: SignUpDto): Promise<User> {
     try {
       const hashedPassword = await bcrypt.hash(signUpDto.password, 10);
-      let user;
+      let user: User;
 
       if (signUpDto.email) {
-        const email = this.emailRepository.create({
+        user = await this.usersService.createUserWithEmailAndPassword({
           email: signUpDto.email,
-        });
-        user = this.userRepository.create({
           password: hashedPassword,
-          emails: [email],
         });
       } else {
-        const phoneNumber = this.phoneNumberRepository.create({
+        user = await this.usersService.createUserWithPhoneNumberAndPassword({
           phoneNumber: signUpDto.phoneNumber,
-        });
-        user = this.userRepository.create({
           password: hashedPassword,
-          phoneNumbers: [phoneNumber],
         });
       }
-
-      await this.userRepository.save(user);
       return user;
     } catch (error) {
       if (
@@ -76,17 +61,15 @@ export class AuthService {
         user: any;
 
       if (email) {
-        const userEmail = await this.emailRepository.findOneOrFail({
-          where: { email },
-          relations: ['user', 'user.city', 'user.phoneNumbers', 'user.emails'],
+        user = await this.usersService.findUserByEmailOrFail({
+          email,
+          userRelations: ['city', 'phoneNumbers', 'emails'],
         });
-        user = userEmail.user;
       } else if (phoneNumber) {
-        const userPhoneNumber = await this.phoneNumberRepository.findOneOrFail({
-          where: { phoneNumber },
-          relations: ['user', 'user.city', 'user.phoneNumbers', 'user.emails'],
+        user = await this.usersService.findUserByPhoneNumberOrFail({
+          phoneNumber,
+          userRelations: ['city', 'phoneNumbers', 'emails'],
         });
-        user = userPhoneNumber.user;
       } else {
         throw new BadRequestException();
       }
